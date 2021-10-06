@@ -1,0 +1,16 @@
+body {
+    font-family: 'Open Sans' !important;
+    background-color: #FCFCFC;
+}
+
+.bg-light {
+    background-color: #F4F4F4 !important;
+}
+
+.nav-link {
+    color: #A6A7AF !important;
+}
+
+.nav-link:hover {
+    color: #2D3040 !important;
+}
