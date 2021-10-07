@@ -14,3 +14,95 @@ body {
 .nav-link:hover {
     color: #2D3040 !important;
 }
+
+.login-border {
+    height: max-content;
+    width: 350px;
+    margin-top: 15%;
+    margin-right: auto;
+    margin-left: auto;
+
+
+    background: #FCFCFC;
+    box-shadow: 0px 0px 50px #DDDDDD;
+    border-radius: 20px;
+}
+
+#login-form,
+.form-control {
+    color:#888888;
+}
+
+#login-form {
+    margin-top: 64px;
+}
+
+.form-control { 
+    font-weight: 400;
+    font-style: normal;
+    line-height: 24px;
+    color: #A6A7AF;
+    background-color: #F7F7F7;
+    border:2px solid  #F7F7F7;
+    border-radius: 30px;
+}
+
+.form-control:focus {
+    box-shadow: none;
+    border:2px solid #FFCF07;
+    background-color: #F7F7F7;
+}
+
+.form-control:hover {
+    box-shadow: none;
+    border:2px solid #FFCF07;
+    background-color: #F7F7F7;
+}
+
+.form-control::placeholder {
+    color: #A6A7AF
+}
+
+.form-check-input {
+    background-color: #F7F7F7 !important;
+    border: 1px solid #e9e7e7 !important;
+    border-radius: 30px !important;
+}
+
+.form-check-input:focus {
+    background-color: #ffe478 !important;
+    box-shadow: 0 0 0 0.2rem #ffe478 !important;
+}
+
+.form-check-input:hover {
+    background-color: #ffe478 !important;
+    box-shadow: 0 0 0 0.2rem #ffe478 !important;
+}
+
+.form-check-input:checked {
+    background-color: #FFCF07 !important;
+    border: 1px solid #FFCF07 !important;
+    border-radius: 30px !important;
+}
+
+.form-check-label {
+    color: #A6A7AF !important;
+}
+
+input {
+    margin: 16px auto;
+}
+
+.btn {
+    margin-bottom: 32px;
+    margin-top: 64px;
+    color: #A6A7AF;
+    background: #F7F7F7;
+}
+
+.btn:focus,
+.btn:active,
+.btn:hover {
+    color: #2D3040;
+    background: #FFCF07;
+}
