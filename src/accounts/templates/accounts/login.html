@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+<section class="container">
+        <div class="row">
+            <section class="login-border">
+
+                <form method="post" id="login-form">
+
+                    <div class="col-sm-10 offset-sm-1">
+                        <input type="text" class="form-control" id="username" placeholder="Name">
+                    </div>
+
+                    <div class="col-sm-10 offset-sm-1">
+                        <input type="password" class="form-control" id="password" placeholder="Password">
+                    </div>
+
+                    <div class="col-sm-10 offset-sm-1">
+                        <input type="submit" class="btn form-control" value="Login">
+                    </div>
+                </form>
+            </section>
+        </div>
+</section>
+{% endblock %}
