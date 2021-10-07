@@ -7,8 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/src/static/styles/style.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='node_modules/bootstrap/dist/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/style.css') }}">
 
     <title>{% block title %}{% endblock %} - Fuck</title>
 </head>
@@ -18,7 +18,7 @@
         <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="#">
-                    <img src="/src/static/icons/logo.svg" alt="" width="80" height="45">
+                    <img src="{{ url_for('static', filename='icons/logo.svg') }}" alt="" width="80" height="45">
                 </a>
                 <div class="navbar" id="navbarNav">
                     <ul class="navbar-nav">
@@ -42,7 +42,7 @@
         <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="#">
-                    <img src="/src/static/icons/logo.svg" alt="" width="80" height="45">
+                    <img src="{{ url_for('static', filename='icons/logo.svg') }}" alt="" width="80" height="45">
                 </a>
                 <div class="navbar" id="navbarNav">
                     <ul class="navbar-nav">
@@ -57,7 +57,7 @@
 
     {% block content %}{% endblock %}
 
-    <script src="/node_modules/dist/js/bootstrap.min.js"></script>
+    <script src="{{ url_for('static', filename='node_modules/bootstrap/dist/js/bootstrap.min.js') }}"></script>
 </body>
 
 </html>
