@@ -1,5 +1,5 @@
-from flask import request, redirect, url_for, flash, render_template, Blueprint
-from flask_login import login_user, logout_user
+from flask import request, redirect, url_for, flash, render_template, Blueprint, abort
+from flask_login import login_user, login_required, logout_user
 
 from accounts.services import find_by_username_and_password, password_hash, IncorrectPasswordError, UserNotFoundError
 
@@ -18,19 +18,16 @@ def login():
         try:
             user = find_by_username_and_password(
                 username, password_hash(password))
-        except IncorrectPasswordError:
-            flash('Incorrect password.')
-        except UserNotFoundError:
-            flash('Incorrect username.')
-        except Exception:
-            flash('Unknown error.')
+        except Exception as e:
+            flash(str(e) or 'Unknown error')
         else:
             login_user(user, remember=remember)
-        return render_template('accounts/login.html') #TODO: изменить редирект
+            return render_template('accounts/login.html') #TODO: изменить редирект
     return render_template('accounts/login.html')
 
 
 @accounts_blueprint.route('/logout', methods=('GET',))
+@login_required
 def logout():
     logout_user()
     return redirect(url_for('accounts.login'))

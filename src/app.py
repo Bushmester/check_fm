@@ -3,10 +3,10 @@ import os
 from flask import Flask
 from flask_login import LoginManager
 
-from accounts.database import users_lst
+from database import users_lst
 from accounts.user import User
 
-from accounts.accounts import accounts_blueprint
+from accounts.controllers import accounts_blueprint
 from accounts.services import find_by_username_and_password, password_hash, IncorrectPasswordError, UserNotFoundError
 from local_configs import Configuration
 
@@ -19,7 +19,6 @@ def main():
 
     if not os.getenv('IS_PRODUCTION', None):
         app.config.from_object(Configuration)
-    print(app.url_map)
 
     login_manager = LoginManager()
     login_manager.init_app(app)
