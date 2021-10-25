@@ -1,4 +1,4 @@
-from accounts.database import users_lst
+from database import users_lst
 
 from hashlib import sha256
 
