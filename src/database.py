@@ -1,4 +1,5 @@
 from accounts.user import User
+from flask_sqlalchemy import SQLAlchemy
 
 
 users_lst = [
@@ -14,3 +15,5 @@ users_lst = [
     )
 ]
 #TODO: изменить на нормальную базу
+
+db = SQLAlchemy()
