@@ -2,10 +2,10 @@ from database import db
 
 
 User_Group = db.Table(
-    'User_Group',
+    'user_group',
     db.Column('id', db.Integer, primary_key=True),
-    db.Column('user_id', db.Integer, db.ForeignKey('User.id')),
-    db.Column('group_id', db.Integer, db.ForeignKey('Group.id'))
+    db.Column('user_id', db.Integer, db.ForeignKey('user.id')),
+    db.Column('group_id', db.Integer, db.ForeignKey('group.id'))
 )
 
 
@@ -16,7 +16,7 @@ class User(db.Model):
     name = db.Column(db.String(255), nullable=False)
     hashed_password = db.Column(db.String(1024), nullable=False)
     users_products = db.relationship("User_Product", back_populates="users")
-    groups = db.relationship('Group', secondary=User_Group, backref='User')
+    groups = db.relationship('Group', secondary=User_Group, backref='users')
 
     def __repr__(self):
         return f"<User {self.name}>"
