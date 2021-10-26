@@ -27,7 +27,7 @@ class Product(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(255), nullable=False)
-    price = db.Column(db.Decimal, nullable=False, default=0)
+    price = db.Column(db.Numeric, nullable=False, default=0)
     category = db.Column(db.String(255), nullable=False),
     description = db.Column(db.String(255), nullable=True)
     users_products = db.relationship("User_Product", back_populates="products")
