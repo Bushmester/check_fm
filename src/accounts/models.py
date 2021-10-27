@@ -1,6 +1,6 @@
 from database import db
 
-User_Group = db.Table(
+UserGroup = db.Table(
     'user_group',
     db.Column('id', db.Integer, primary_key=True),
     db.Column('user_id', db.Integer, db.ForeignKey('user.id')),
@@ -14,8 +14,8 @@ class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(255), nullable=False)
     hashed_password = db.Column(db.String(1024), nullable=False)
-    users_products = db.relationship("User_Product", back_populates="users")
-    groups = db.relationship('Group', secondary=User_Group, backref='users')
+    users_products = db.relationship("UserProduct", back_populates="users")
+    groups = db.relationship('Group', secondary=UserGroup, backref='users')
 
     def __repr__(self):
         return f"<User {self.name}>"
@@ -28,8 +28,8 @@ class Product(db.Model):
     name = db.Column(db.String(255), nullable=False)
     price = db.Column(db.Numeric, nullable=False, default=0)
     description = db.Column(db.String(255), nullable=True)
-    users_products = db.relationship("User_Product", back_populates="products")
-    groups_products = db.relationship("Group_Product", back_populates="products")
+    users_products = db.relationship("UserProduct", back_populates="products")
+    groups_products = db.relationship("GroupProduct", back_populates="products")
     products_categorys = db.relationship("ProductCategory", back_populates="products")
 
     def __repr__(self):
@@ -49,14 +49,14 @@ class Group(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(255), nullable=False)
-    users = db.relationship('User', secondary=User_Group, backref='Group')
-    groups_products = db.relationship("Group_Product", back_populates="groups")
+    users = db.relationship('User', secondary=UserGroup, backref='Group')
+    groups_products = db.relationship("GroupProduct", back_populates="groups")
 
     def __repr__(self):
         return f"<Group {self.name}>"
 
 
-class User_Product(db.Model):
+class UserProduct(db.Model):
     __tablename__ = "user_product"
 
     id = db.Column(db.Integer, primary_key=True)
@@ -66,7 +66,7 @@ class User_Product(db.Model):
     products = db.relationship("Product", back_populates="users_products")
 
 
-class Group_Product(db.Model):
+class GroupProduct(db.Model):
     __tablename__ = "group_product"
 
     id = db.Column(db.Integer, primary_key=True)
