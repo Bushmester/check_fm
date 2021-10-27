@@ -98,3 +98,45 @@ input {
     color: #2D3040;
     background: #FFCF07;
 }
+
+.in_card {
+    margin-top: 10%;
+    margin-bottom: auto;
+    border-radius: 30px;
+}
+
+.in_card:focus,
+.in_card:active,
+.in_card:hover {
+    border: 1px solid #FFCF07 !important;
+    background-color: #F7F7F7 !important;
+}
+
+.dashboard_btn,
+.dashboard_btn:focus,
+.dashboard_btn:active,
+.dashboard_btn:hover {
+    color: #2D3040;
+    background: #FFCF07;
+    border: 1px solid #FFCF07
+}
+
+.search_btn {
+    color: #2D3040;
+    background: #FCFCFC;
+    border: 2px solid #FFCF07;
+}
+
+.dashboard_card {
+    margin-top: 2%;
+}
+
+.card {
+    border: 0 !important;
+    border-radius: 30px !important;
+    box-shadow: 0px 0px 50px #DDDDDD !important;
+}
+
+.dashboard {
+    margin-top: 1%;
+}
