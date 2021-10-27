@@ -44,7 +44,7 @@ def login():
                 return redirect(url_for('accounts.login'))
             else:
                 login_user(user, remember=form.remember.data)
-                return redirect(url_for('accounts.login')) #TODO: изменить редирект
+                return redirect(url_for('accounts.dashboard'))
     return render_template('accounts/login.html', form=form)
 
 
@@ -53,3 +53,9 @@ def login():
 def logout():
     logout_user()
     return redirect(url_for('accounts.login'))
+
+
+@accounts_blueprint.route("/dashboard", methods=["GET"])
+@login_required
+def dashboard():
+    return render_template('accounts/dashboard.html')
