@@ -13,6 +13,7 @@ class User(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(255), nullable=False)
+    email = db.Column(db.String(128), unique=True)
     hashed_password = db.Column(db.String(1024), nullable=False)
     users_products = db.relationship("UserProduct", back_populates="users")
     groups = db.relationship('Group', secondary=UserGroup, backref='users')
