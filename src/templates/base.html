@@ -14,7 +14,7 @@
 </head>
 
 <body>
-    {% if current_user.username %}
+    {% if current_user.name %}
         <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="#">
@@ -29,7 +29,7 @@
                             <a class="nav-link fs-5" href="#">Statistics</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link fs-5 fw-bolder href="#">{{ current_user.username }}</a>
+                            <a class="nav-link fs-5 fw-bolder" href="#"> {{ current_user.name }} </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link fs-5 fw-lighter" href="{{ url_for('accounts.logout') }}">LogOut</a>
@@ -48,6 +48,9 @@
                     <ul class="navbar-nav">
                         <li class="nav-item">
                             <a class="nav-link fs-5 fw-lighter" href="{{ url_for('accounts.login') }}">LogIn</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link fs-5 fw-lighter" href="{{ url_for('accounts.signup') }}">SignUp</a>
                         </li>
                     </ul>
                 </div>

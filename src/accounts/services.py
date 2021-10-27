@@ -1,6 +1,7 @@
-from werkzeug.security import check_password_hash
+from werkzeug.security import generate_password_hash, check_password_hash
 
 from accounts.models import User
+from database import db
 
 
 class NotFoundError(Exception):
@@ -12,7 +13,7 @@ class IncorrectPasswordError(Exception):
 
 
 def find_by_username_and_password(username: str, password: str):
-    user = User.query.filter_by(username=username).first()
+    user = User.query.filter_by(name=username).first()
     if not user:
         raise NotFoundError('Incorrect username')
     if not check_password_hash(user.hashed_password, password):
@@ -25,3 +26,9 @@ def find_user_by_id(user_id: int):
     if not user:
         raise NotFoundError()
     return user
+
+
+def create_user(email: str, name: str, password: str):
+    new_user = User(email=email, name=name, hashed_password=generate_password_hash(password))
+    db.session.add(new_user)
+    db.session.commit()

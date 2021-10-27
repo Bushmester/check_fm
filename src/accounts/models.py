@@ -1,3 +1,5 @@
+from flask_login import UserMixin
+
 from database import db
 # noinspection PyUnresolvedReferences
 from products.models import Product
@@ -10,7 +12,7 @@ UserGroup = db.Table(
 )
 
 
-class User(db.Model):
+class User(db.Model, UserMixin):
     __tablename__ = "user"
 
     id = db.Column(db.Integer, primary_key=True)
@@ -21,7 +23,7 @@ class User(db.Model):
     groups = db.relationship('Group', secondary=UserGroup, backref='User')
 
     def __repr__(self):
-        return f"<User {self.name}>"
+        return f"<User {self.name}, id {self.id}>"
 
 
 class Group(db.Model):
