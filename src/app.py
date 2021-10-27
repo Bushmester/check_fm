@@ -9,7 +9,7 @@ from accounts.login_manager import login_manager
 from accounts.models import UserGroup, User, Group, UserProduct, GroupProduct
 from products.controllers import products_blueprint
 # noinspection PyUnresolvedReferences
-from products.models import Product, Category, ProductCategory
+from products.models import Product
 from database import db, migrate
 from local_configs import Configuration
 
