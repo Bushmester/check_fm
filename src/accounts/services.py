@@ -1,9 +1,9 @@
-from database import users_lst
+from werkzeug.security import check_password_hash
 
-from hashlib import sha256
+from accounts.models import User
 
 
-class UserNotFoundError(Exception):
+class NotFoundError(Exception):
     pass
 
 
@@ -11,21 +11,17 @@ class IncorrectPasswordError(Exception):
     pass
 
 
-def find_by_username_and_password(username, hashed_password):
-    for user in users_lst:
-        if user.username == username:
-            if user.hashed_password == hashed_password:
-                return user
-            else:
-                raise IncorrectPasswordError()
-    raise UserNotFoundError()
+def find_by_username_and_password(username: str, password: str):
+    user = User.query.filter_by(username=username).first()
+    if not user:
+        raise NotFoundError('Incorrect username')
+    if not check_password_hash(user.hashed_password, password):
+        raise IncorrectPasswordError('Incorrect password')
+    return user
 
 
-def find_by_id(user_id):
-    for user in users_lst:
-        if user.id == user_id:
-            return user
-
-
-def password_hash(password):
-    return sha256(password.encode("utf-8")).hexdigest()
+def find_user_by_id(user_id: int):
+    user = User.query.filter_by(id=user_id).first()
+    if not user:
+        raise NotFoundError()
+    return user

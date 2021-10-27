@@ -1,36 +1,25 @@
 import os
 
 from flask import Flask
-from flask_login import LoginManager
-
-from database import users_lst
-from accounts.user import User
 
 from accounts.controllers import accounts_blueprint
-from accounts.services import find_by_username_and_password, password_hash, IncorrectPasswordError, UserNotFoundError
+from accounts.login_manager import login_manager
+# noinspection PyUnresolvedReferences
+from accounts.models import UserGroup, User, Product, Group, UserProduct, GroupProduct, Category, ProductCategory
+from database import db, migrate
 from local_configs import Configuration
 
 
 app = Flask(__name__)
 
+if not os.getenv('IS_PRODUCTION', None):
+    app.config.from_object(Configuration)
 
-def main():
-    app.register_blueprint(accounts_blueprint, url_prefix='/accounts')
+db.init_app(app)
+migrate.init_app(app, db)
+login_manager.init_app(app)
 
-    if not os.getenv('IS_PRODUCTION', None):
-        app.config.from_object(Configuration)
-
-    login_manager = LoginManager()
-    login_manager.init_app(app)
-
-    @login_manager.user_loader
-    def load_user(user_id):
-        for user in users_lst:
-            if user_id == user.get_id():
-                return user
-
-    app.run()
-
+app.register_blueprint(accounts_blueprint, url_prefix='/accounts')
 
 if __name__ == '__main__':
-    main()
+    app.run(debug=True)
