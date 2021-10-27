@@ -15,7 +15,7 @@ body {
     color: #2D3040 !important;
 }
 
-.login-border {
+.form-border {
     height: max-content;
     width: 350px;
     margin-top: 15%;
@@ -28,12 +28,12 @@ body {
     border-radius: 20px;
 }
 
-#login-form,
+#form-form,
 .form-control {
     color:#888888;
 }
 
-#login-form {
+#form-form {
     margin-top: 64px;
 }
 
@@ -47,13 +47,9 @@ body {
     border-radius: 30px;
 }
 
-.form-control:focus {
-    box-shadow: none;
-    border:2px solid #FFCF07;
-    background-color: #F7F7F7;
-}
-
-.form-control:hover {
+.form-control:focus,
+.form-control:hover,
+.form-control:active{
     box-shadow: none;
     border:2px solid #FFCF07;
     background-color: #F7F7F7;
@@ -69,12 +65,8 @@ body {
     border-radius: 30px !important;
 }
 
-.form-check-input:focus {
-    background-color: #ffe478 !important;
-    box-shadow: 0 0 0 0.2rem #ffe478 !important;
-}
-
-.form-check-input:hover {
+.form-check-input:focus,
+.form-check-input:hover{
     background-color: #ffe478 !important;
     box-shadow: 0 0 0 0.2rem #ffe478 !important;
 }

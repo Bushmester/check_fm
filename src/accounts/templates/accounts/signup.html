@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% block title %}Login{% endblock %}
+{% block title %}SignUp{% endblock %}
 
 {% block content %}
 <section class="container">
@@ -11,6 +11,10 @@
                 {{ form.csrf_token }}
 
                 <div class="col-sm-10 offset-sm-1">
+                    <input type="email" class="form-control" name="email" id="email" placeholder="Email" value="{{ form.email.data }}">
+                </div>
+
+                <div class="col-sm-10 offset-sm-1">
                     <input type="text" class="form-control" name="username" id="username" placeholder="Name" value="{{ form.username.data }}">
                 </div>
 
@@ -19,14 +23,11 @@
                 </div>
 
                 <div class="col-sm-10 offset-sm-1">
-                    <input class="form-check-input" type="checkbox" name="remember" id="flexCheckDefault" value="{{ form.remember.data }}">
-                    <label class="form-check-label" for="flexCheckDefault">
-                        Remember me
-                    </label>
+                    <input type="password" class="form-control" name="confirm_password" id="confirm_password" placeholder="Confirm Password" value="{{ form.confirm_password.data }}">
                 </div>
 
                 <div class="col-sm-10 offset-sm-1">
-                    <input type="submit" class="btn form-control" value="Login">
+                    <input type="submit" class="btn form-control" value="SignUp">
                 </div>
             </form>
         </section>
