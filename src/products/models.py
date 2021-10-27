@@ -1,4 +1,6 @@
 from database import db
+# noinspection PyUnresolvedReferences
+# from accounts.models import UserProduct, GroupProduct
 
 
 class Product(db.Model):
@@ -29,6 +31,6 @@ class ProductCategory(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     product_id = db.Column(db.Integer, db.ForeignKey('product.id'))
-    products = db.relationship("Product", back_populates="products_groups")
+    products = db.relationship("Product", back_populates="products_categorys")
     category_id = db.Column(db.Integer, db.ForeignKey('category.id'))
-    category = db.relationship("Category", back_populates="products_categorys")
+    categorys = db.relationship("Category", back_populates="products_categorys")

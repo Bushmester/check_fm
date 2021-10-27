@@ -14,37 +14,14 @@ class User(db.Model):
     __tablename__ = "user"
 
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(255), nullable=False)
+    name = db.Column(db.String(32), nullable=False)
     email = db.Column(db.String(128), unique=True)
     hashed_password = db.Column(db.String(1024), nullable=False)
     users_products = db.relationship("UserProduct", back_populates="users")
-    groups = db.relationship('Group', secondary=UserGroup, backref='users')
+    groups = db.relationship('Group', secondary=UserGroup, backref='User')
 
     def __repr__(self):
         return f"<User {self.name}>"
-
-
-# class Product(db.Model):
-#     __tablename__ = "product"
-#
-#     id = db.Column(db.Integer, primary_key=True)
-#     name = db.Column(db.String(255), nullable=False)
-#     price = db.Column(db.Numeric, nullable=False, default=0)
-#     description = db.Column(db.String(255), nullable=True)
-#     users_products = db.relationship("UserProduct", back_populates="products")
-#     groups_products = db.relationship("GroupProduct", back_populates="products")
-#     products_categorys = db.relationship("ProductCategory", back_populates="products")
-#
-#     def __repr__(self):
-#         return f"<Product {self.name}>"
-#
-#
-# class Category(db.Model):
-#     __tablename__ = "category"
-#
-#     id = db.Column(db.Integer, primary_key=True)
-#     name = db.Column(db.String(255), nullable=False)
-#     products_categorys = db.relationship("ProductCategory", back_populates="categorys")
 
 
 class Group(db.Model):
@@ -77,13 +54,3 @@ class GroupProduct(db.Model):
     groups = db.relationship("Group", back_populates="groups_products")
     product_id = db.Column(db.Integer, db.ForeignKey('product.id'))
     products = db.relationship("Product", back_populates="groups_products")
-
-
-# class ProductCategory(db.Model):
-#     __tablename__ = "product_category"
-#
-#     id = db.Column(db.Integer, primary_key=True)
-#     product_id = db.Column(db.Integer, db.ForeignKey('product.id'))
-#     products = db.relationship("Product", back_populates="products_groups")
-#     category_id = db.Column(db.Integer, db.ForeignKey('category.id'))
-#     category = db.relationship("Category", back_populates="products_categorys")
