@@ -5,7 +5,7 @@ from flask import Flask
 from accounts.controllers import accounts_blueprint
 from accounts.login_manager import login_manager
 # noinspection PyUnresolvedReferences
-from accounts.models import User_Group, User, Product, Group, User_Product, Group_Product
+from accounts.models import User_Group, User, Product, Group, User_Product, Group_Product, Category, ProductCategory
 from database import db, migrate
 from local_configs import Configuration
 

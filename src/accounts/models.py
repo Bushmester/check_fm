@@ -1,6 +1,5 @@
 from database import db
 
-
 User_Group = db.Table(
     'user_group',
     db.Column('id', db.Integer, primary_key=True),
@@ -28,13 +27,21 @@ class Product(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(255), nullable=False)
     price = db.Column(db.Numeric, nullable=False, default=0)
-    category = db.Column(db.String(255), nullable=False),
     description = db.Column(db.String(255), nullable=True)
     users_products = db.relationship("User_Product", back_populates="products")
     groups_products = db.relationship("Group_Product", back_populates="products")
+    products_categorys = db.relationship("ProductCategory", back_populates="products")
 
     def __repr__(self):
         return f"<Product {self.name}>"
+
+
+class Category(db.Model):
+    __tablename__ = "category"
+
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(255), nullable=False)
+    products_categorys = db.relationship("ProductCategory", back_populates="categorys")
 
 
 class Group(db.Model):
@@ -67,3 +74,13 @@ class Group_Product(db.Model):
     groups = db.relationship("Group", back_populates="groups_products")
     product_id = db.Column(db.Integer, db.ForeignKey('product.id'))
     products = db.relationship("Product", back_populates="groups_products")
+
+
+class ProductCategory(db.Model):
+    __tablename__ = "product_category"
+
+    id = db.Column(db.Integer, primary_key=True)
+    product_id = db.Column(db.Integer, db.ForeignKey('product.id'))
+    products = db.relationship("Product", back_populates="products_groups")
+    category_id = db.Column(db.Integer, db.ForeignKey('category.id'))
+    category = db.relationship("Category", back_populates="products_categorys")
