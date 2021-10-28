@@ -32,7 +32,7 @@ class Group(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(255), nullable=False)
     users = db.relationship('User', secondary=UserGroup, backref='Group')
-    groups_products = db.relationship("GroupProduct", back_populates="groups")
+    products = db.relationship("GroupProduct", back_populates="groups")
 
     def __repr__(self):
         return f"<Group {self.name}>"
@@ -53,6 +53,6 @@ class GroupProduct(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     group_id = db.Column(db.Integer, db.ForeignKey('group.id'))
-    groups = db.relationship("Group", back_populates="groups_products")
+    groups = db.relationship("Group", back_populates="products")
     product_id = db.Column(db.Integer, db.ForeignKey('product.id'))
     products = db.relationship("Product", back_populates="groups_products")

@@ -140,3 +140,16 @@ input {
 .dashboard {
     margin-top: 1%;
 }
+
+.pagination {
+    margin-left: 48.5%;
+}
+
+.pagination_link {
+    color: #2D3040 !important;
+    font-weight: bold !important;
+}
+
+.pagination_link:hover {
+    color: #FFCF07 !important;
+}

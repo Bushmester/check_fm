@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block title %}Create Product{% endblock %}
+
+{% block content %}
+<section class="container">
+    <div class="row">
+        <section class="form-border">
+
+            <form method="post" id="form-form">
+                {{ form.csrf_token }}
+
+                <div class="col-sm-10 offset-sm-1">
+                    <input class="form-control" name="name" id="name" placeholder="Name" value="{{ form.name.data }}">
+                </div>
+
+                <div class="col-sm-10 offset-sm-1">
+                    <input type="number" step="any"  class="form-control" name="price" id="price" placeholder="Price" value="{{ form.price.data }}">
+                </div>
+
+                <div class="col-sm-10 offset-sm-1">
+                    <input class="form-control" name="category" id="category" placeholder="Category" value="{{ form.category.data }}">
+                </div>
+
+                <div class="col-sm-10 offset-sm-1">
+                    <textarea class="form-control" name="description" id="description" placeholder="Description" value="{{ form.description.data }}"></textarea>
+                </div>
+
+                <div class="col-sm-10 offset-sm-1">
+                    <input type="submit" class="btn form-control" value="Add">
+                </div>
+            </form>
+        </section>
+    </div>
+</section>
+{% endblock %}

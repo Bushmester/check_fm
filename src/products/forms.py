@@ -8,7 +8,7 @@ class ProductForm(FlaskForm):
         "name",
         validators=[
             DataRequired(),
-            Length(min=4, max=32)
+            Length(max=32)
         ]
     )
     price = DecimalField(
@@ -21,13 +21,13 @@ class ProductForm(FlaskForm):
         "category",
         validators=[
             DataRequired(),
-            Length(min=4, max=32)
+            Length(min=3, max=32)
         ]
     )
     description = StringField(
-        "category",
+        "description",
         validators=[
             DataRequired(),
-            Length(min=4, max=1024)
+            Length(max=1024)
         ]
     )
