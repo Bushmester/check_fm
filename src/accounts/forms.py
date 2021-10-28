@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, BooleanField
+from wtforms import StringField, PasswordField, BooleanField, TextAreaField
 from wtforms.validators import DataRequired, Length, Email, EqualTo, Optional
 
 
@@ -83,5 +83,21 @@ class EditUserInfoForm(FlaskForm):
         validators=[
             Optional(),
             Length(min=6, max=64),
+        ]
+    )
+
+
+class CreateGroupForm(FlaskForm):
+    name = StringField(
+        "name",
+        validators=[
+            DataRequired(),
+            Length(min=4, max=32)
+        ]
+    )
+    party = TextAreaField(
+        "party",
+        validators=[
+            Optional()
         ]
     )

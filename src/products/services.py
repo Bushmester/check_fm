@@ -43,4 +43,3 @@ def create_product_for_user(name, price, category, description):
     except SQLAlchemyError as e:
         db.session.rollback()
         raise DatabaseError(f'Unknown error')
-
