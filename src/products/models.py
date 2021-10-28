@@ -1,6 +1,4 @@
 from database import db
-# # noinspection PyUnresolvedReferences
-# from accounts.models import UserProduct, GroupProduct
 
 
 class Product(db.Model):

@@ -47,7 +47,7 @@ def edit_user(current_email: str, email: str, name: str, hashed_password: Option
         db.session.commit()
 
 
-def create_group(name, party):
+def create_group(name: str, party: List[str]):
     try:
         group = Group(
             name=name
@@ -60,4 +60,3 @@ def create_group(name, party):
             UserGroup.user_id = User.query.filter_by(email=user).first()
     except SQLAlchemyError as e:
         db.session.rollback()
-        # raise DatabaseError(f'Unknown error')

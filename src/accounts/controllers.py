@@ -3,10 +3,8 @@ from werkzeug.security import generate_password_hash
 from flask import request, redirect, url_for, flash, render_template, Blueprint
 from flask_login import login_user, login_required, logout_user, current_user
 
-from accounts.models import User, UserProduct
 from accounts.services import find_by_username_and_password, create_user, edit_user, create_group
 from accounts.forms import LoginForm, SignUpForm, EditUserInfoForm, CreateGroupForm
-from products.models import Product
 from products.services import get_paginated_product_user_list
 
 from database import db
