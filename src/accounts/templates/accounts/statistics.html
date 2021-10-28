@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{#{% from 'macros.html' import render_pagination with context %}#}
+
+{% block title %}Statistic{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row align-items-start row-cols-2">
+            {% for res in results %}
+                <div class="col dashboard_card">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title fw-bold fs-2">{{ res.sum }}$</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">{{ res.category }}</h6>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+{#    <div class="container">#}
+{#        <div class="col-12">#}
+{#            {{ render_pagination(pagination=pagination, endpoint='accounts.dashboard') }}#}
+{#        </div>#}
+{#    </div>#}
+    <script src="/src/static/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+{% endblock %}

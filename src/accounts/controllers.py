@@ -7,6 +7,8 @@ from accounts.forms import LoginForm, SignupForm
 from products.models import Product
 from products.services import get_paginated_product_user_list
 
+from database import db
+
 accounts_blueprint = Blueprint('accounts', __name__, template_folder='templates')
 
 
@@ -58,3 +60,20 @@ def dashboard():
     page = int(raw_page) if raw_page.isdigit() else 1
     pagination = get_paginated_product_user_list(page)
     return render_template('accounts/dashboard.html', pagination=pagination)
+
+
+@accounts_blueprint.route("/statistics", methods=["GET"])
+@login_required
+def statistics():
+    with db.engine.connect() as conn:
+        results = conn.execute(db.text('''
+            SELECT
+                category,
+                SUM(price) sum
+            FROM product
+            LEFT JOIN user_product up on product.id = up.product_id
+            LEFT JOIN "user" u on up.user_id = u.id
+            WHERE u.id = (:i)
+            GROUP BY category;
+        '''), [{"i": current_user.id}])
+    return render_template('accounts/statistics.html', results=results)
