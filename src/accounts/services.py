@@ -1,3 +1,5 @@
+from typing import Optional
+
 from werkzeug.security import generate_password_hash, check_password_hash
 
 from accounts.models import User
@@ -32,3 +34,12 @@ def create_user(email: str, name: str, password: str):
     new_user = User(email=email, name=name, hashed_password=generate_password_hash(password))
     db.session.add(new_user)
     db.session.commit()
+
+
+def edit_user(current_email: str, email: str, name: str, hashed_password: Optional[str]):
+    user = User.query.filter_by(email=current_email).first()
+    user.email = email
+    user.name = name
+    db.session.commit()
+    if hashed_password:
+        db.session.commit()

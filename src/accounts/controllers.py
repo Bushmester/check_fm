@@ -1,9 +1,11 @@
+from werkzeug.security import generate_password_hash
+
 from flask import request, redirect, url_for, flash, render_template, Blueprint
 from flask_login import login_user, login_required, logout_user, current_user
 
 from accounts.models import User, UserProduct
-from accounts.services import find_by_username_and_password, create_user
-from accounts.forms import LoginForm, SignupForm
+from accounts.services import find_by_username_and_password, create_user, edit_user
+from accounts.forms import LoginForm, SignUpForm, EditUserInfoForm
 from products.models import Product
 from products.services import get_paginated_product_user_list
 
@@ -14,7 +16,7 @@ accounts_blueprint = Blueprint('accounts', __name__, template_folder='templates'
 
 @accounts_blueprint.route('/signup', methods=('GET', 'POST'))
 def signup():
-    form = SignupForm(request.form)
+    form = SignUpForm(request.form)
 
     if request.method == 'POST':
         if form.validate_on_submit():
@@ -32,7 +34,6 @@ def signup():
 @accounts_blueprint.route('/login', methods=('GET', 'POST'))
 def login():
     form = LoginForm(request.form)
-
     if request.method == 'POST':
         if form.validate_on_submit():
             try:
@@ -77,3 +78,24 @@ def statistics():
             GROUP BY category;
         '''), [{"i": current_user.id}])
     return render_template('accounts/statistics.html', results=results)
+
+
+@accounts_blueprint.route('/profile', methods=('GET', 'POST'))
+@login_required
+def profile():
+    form = EditUserInfoForm(request.form)
+    if request.method == 'POST':
+        if form.validate_on_submit():
+            try:
+                current_email = current_user.email
+                new_email = form.email.data if form.email.data else current_email
+                new_name = form.username.data if form.username.data else current_user.name
+                new_password = generate_password_hash(form.password.data) if form.password.data else None
+                edit_user(current_email, new_email, new_name, new_password)
+            except Exception as e:
+                flash(str(e) or 'Unknown error', 'error')
+                return redirect(url_for('accounts.profile'))
+            else:
+                return redirect(url_for('accounts.dashboard'))
+
+    return render_template('accounts/profile.html', form=form, user=current_user)

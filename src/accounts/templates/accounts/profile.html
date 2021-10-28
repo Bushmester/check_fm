@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block title %}SignUp{% endblock %}
+
+{% block content %}
+<section class="container">
+    <div class="row">
+        <section class="form-border">
+
+            <form method="post" id="form-form">
+                {{ form.csrf_token }}
+
+                <div class="col-sm-10 offset-sm-1">
+                    <input type="email" class="form-control" name="email" id="email" placeholder="{{ user.email }}" value="{{ form.email.data }}">
+                </div>
+
+                <div class="col-sm-10 offset-sm-1">
+                    <input type="text" class="form-control" name="username" id="username" placeholder="{{ user.name }}" value="{{ form.username.data }}">
+                </div>
+
+                <div class="col-sm-10 offset-sm-1">
+                    <input type="password" class="form-control" name="password" id="password" placeholder="Password" value="{{ form.password.data }}">
+                </div>
+
+                <div class="col-sm-10 offset-sm-1">
+                    <input type="password" class="form-control" name="confirm_password" id="confirm_password" placeholder="Confirm Password" value="{{ form.confirm_password.data }}">
+                </div>
+
+                <div class="col-sm-10 offset-sm-1">
+                    <input type="submit" class="btn form-control" value="Edit">
+                </div>
+            </form>
+        </section>
+    </div>
+</section>
+{% endblock %}
