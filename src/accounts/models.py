@@ -1,8 +1,6 @@
 from flask_login import UserMixin
 
 from database import db
-# # noinspection PyUnresolvedReferences
-# from products.models import Product
 
 UserGroup = db.Table(
     'user_group',

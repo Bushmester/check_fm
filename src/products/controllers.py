@@ -1,5 +1,5 @@
 from flask import request, redirect, url_for, flash, render_template, Blueprint
-from flask_login import  login_required
+from flask_login import login_required
 
 from products.forms import ProductForm
 from products.services import create_product_for_user
