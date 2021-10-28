@@ -17,7 +17,7 @@
     {% if current_user.name %}
         <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
             <div class="container">
-                <a class="navbar-brand" href="#">
+                <a class="navbar-brand" href="{{ url_for('accounts.dashboard') }}">
                     <img src="{{ url_for('static', filename='icons/logo.svg') }}" alt="" width="80" height="45">
                 </a>
                 <div class="navbar" id="navbarNav">

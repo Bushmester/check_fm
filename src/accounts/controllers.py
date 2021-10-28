@@ -1,17 +1,13 @@
 from flask import request, redirect, url_for, flash, render_template, Blueprint
 from flask_login import login_user, login_required, logout_user, current_user
 
+from accounts.models import User, UserProduct
 from accounts.services import find_by_username_and_password, create_user
 from accounts.forms import LoginForm, SignupForm
+from products.models import Product
+from products.services import get_paginated_product_user_list
 
 accounts_blueprint = Blueprint('accounts', __name__, template_folder='templates')
-
-
-@accounts_blueprint.route('/', methods=('GET',))
-def index():
-    if current_user.is_authenticated:
-        pass
-    return redirect(url_for('accounts.login'))
 
 
 @accounts_blueprint.route('/signup', methods=('GET', 'POST'))
@@ -44,7 +40,7 @@ def login():
                 return redirect(url_for('accounts.login'))
             else:
                 login_user(user, remember=form.remember.data)
-                return redirect(url_for('accounts.login')) #TODO: изменить редирект
+                return redirect(url_for('accounts.dashboard'))
     return render_template('accounts/login.html', form=form)
 
 
@@ -53,3 +49,12 @@ def login():
 def logout():
     logout_user()
     return redirect(url_for('accounts.login'))
+
+
+@accounts_blueprint.route("/dashboard", methods=["GET"])
+@login_required
+def dashboard():
+    raw_page = request.args.get('page', '1')
+    page = int(raw_page) if raw_page.isdigit() else 1
+    pagination = get_paginated_product_user_list(page)
+    return render_template('accounts/dashboard.html', pagination=pagination)
