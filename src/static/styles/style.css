@@ -108,8 +108,8 @@ input {
 .in_card:focus,
 .in_card:active,
 .in_card:hover {
-    border: 1px solid #FFCF07 !important;
     background-color: #F7F7F7 !important;
+    box-shadow: 0 0 0 0.2rem #FFCF07 !important;
 }
 
 .dashboard_btn,

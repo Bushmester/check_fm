@@ -14,11 +14,15 @@ class DatabaseError(Exception):
     pass
 
 
-def get_paginated_product_user_list(page: int) -> Pagination:
+def get_user_product():
     return Product.query \
         .join(UserProduct, Product.id == UserProduct.product_id) \
         .join(User, UserProduct.user_id == User.id) \
-        .filter(User.id == current_user.id).order_by(Product.id.desc()).paginate(page, 12)
+        .filter(User.id == current_user.id).order_by(Product.id.desc())
+
+
+def get_paginated_product_user_list(page: int) -> Pagination:
+    return get_user_product().paginate(page, 12)
 
 
 def create_product_for_user(name, price, category, description):
