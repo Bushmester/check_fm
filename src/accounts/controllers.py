@@ -4,8 +4,8 @@ from flask import request, redirect, url_for, flash, render_template, Blueprint
 from flask_login import login_user, login_required, logout_user, current_user
 
 from accounts.models import User, UserProduct
-from accounts.services import find_by_username_and_password, create_user, edit_user
-from accounts.forms import LoginForm, SignUpForm, EditUserInfoForm
+from accounts.services import find_by_username_and_password, create_user, edit_user, create_group
+from accounts.forms import LoginForm, SignUpForm, EditUserInfoForm, CreateGroupForm
 from products.models import Product
 from products.services import get_paginated_product_user_list
 
@@ -99,3 +99,25 @@ def profile():
                 return redirect(url_for('accounts.dashboard'))
 
     return render_template('accounts/profile.html', form=form, user=current_user)
+
+
+@accounts_blueprint.route("/groups", methods=["GET"])
+@login_required
+def groups():
+    return render_template('accounts/groups.html')
+
+
+@accounts_blueprint.route("/create_group", methods=('GET', 'POST'))
+@login_required
+def create_group_page():
+    form = CreateGroupForm(request.form)
+    if request.method == 'POST':
+        if form.validate_on_submit():
+            try:
+                create_group(form.name.data, form.party.data.split())
+            except Exception as e:
+                flash(str(e) or 'Unknown error', 'error')
+                return redirect(url_for('accounts.create_group'))
+            else:
+                return redirect(url_for('accounts.groups'))
+    return render_template('accounts/create_group.html', form=form)

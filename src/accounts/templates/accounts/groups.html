@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{#{% from 'macros.html' import render_pagination with context %}#}
+
+{% block title %}Statistic{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row dashboard">
+            <div class="col-10">
+                <div class="row">
+                    <div class="col-4"></div>
+                    <div class="col-4"></div>
+                    <div class="col-1"></div>
+                    <div class="col-1"></div>
+                    <div class="col-2"></div>
+                </div>
+            </div>
+
+            <div class="col-2">
+                <form action="{{ url_for('accounts.create_group_page') }}">
+                    <input type="submit" class="form-control dashboard_btn" value="Add">
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row align-items-start row-cols-2">
+            <h5 class="fw-bold fs-2">Не работает(((</h5>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row align-items-start row-cols-2">
+            {% for res in results %}
+                <div class="col dashboard_card">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title fw-bold fs-2">{{ res.name }}</h5>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+{#    <div class="container">#}
+{#        <div class="col-12">#}
+{#            {{ render_pagination(pagination=pagination, endpoint='accounts.dashboard') }}#}
+{#        </div>#}
+{#    </div>#}
+    <script src="/src/static/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+{% endblock %}

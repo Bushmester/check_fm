@@ -1,8 +1,10 @@
-from typing import Optional
+from typing import Optional, List
 
 from werkzeug.security import generate_password_hash, check_password_hash
 
-from accounts.models import User
+from sqlalchemy.exc import SQLAlchemyError
+
+from accounts.models import User, Group, UserGroup
 from database import db
 
 
@@ -43,3 +45,19 @@ def edit_user(current_email: str, email: str, name: str, hashed_password: Option
     db.session.commit()
     if hashed_password:
         db.session.commit()
+
+
+def create_group(name, party):
+    try:
+        group = Group(
+            name=name
+        )
+        db.session.add(group)
+        db.session.commit()
+
+        for user in party:
+            UserGroup.group_id = group,
+            UserGroup.user_id = User.query.filter_by(email=user).first()
+    except SQLAlchemyError as e:
+        db.session.rollback()
+        # raise DatabaseError(f'Unknown error')
