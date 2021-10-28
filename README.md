@@ -1,5 +1,7 @@
 # Check Fucking Money Web-app
 
+![alt text](src/static/icons/logo.svg)
+
 Web приложение для контроля доходов и рассходов
 
 ### Инструкция по запуску
