@@ -1,6 +1,4 @@
-# Check Fucking Money Web-app
-
-![alt text](src/static/icons/logo.svg)
+# Check Money Web-app
 
 Web приложение для контроля доходов и рассходов
 
@@ -8,11 +6,11 @@ Web приложение для контроля доходов и рассхо�
 1. Склонируйте репозиторий
 
 ``` 
-git clone https://gitlab.com/Bushmester/check-fucking-money-web-app.git
+git clone https://github.com/Bushmester/check_fm.git
 
 or
 
-git clone git@gitlab.com:Bushmester/check-fucking-money-web-app.git
+git clone git@github.com:Bushmester/check_fm.git
 ```
 
 2. Создайте вертуальное окуржение и установите все зависимости (все делается при помощи poetry)
@@ -23,7 +21,7 @@ poerty install
 
 3. Создайте в файле ```.env``` переменные окружения ```SECRET_KEY``` и ```DATABASE_URI```
 
-4. ~~э~~Мигрируйте ~~из России~~ базу данных ```flask db upgrade```
+4. Мигрируйте базу данных ```flask db upgrade```
 
 5. Запускайте проект
 
